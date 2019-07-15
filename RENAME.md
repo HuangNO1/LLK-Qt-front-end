@@ -86,22 +86,22 @@ LLK-Qt-front-end
 
 ```C++
 if (data == QString::fromStdString("Register")) // 註冊被按
+{
+    Server->close(); // 關掉 Server
+    Server->hide();
+    if (Server->getFlag() == true)
     {
-        Server->close(); // 關掉 Server
-        Server->hide();
-        if (Server->getFlag() == true)
+        QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+        animation->setDuration(700);
+        animation->setStartValue(1);
+        animation->setEndValue(0);
+        animation->start();
+        QTime reachTime = QTime::currentTime().addMSecs(700); // 700 毫秒
+        while (QTime::currentTime() < reachTime)
         {
-            QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
-            animation->setDuration(700);
-            animation->setStartValue(1);
-            animation->setEndValue(0);
-            animation->start();
-            QTime reachTime = QTime::currentTime().addMSecs(700); // 700 毫秒
-            while (QTime::currentTime() < reachTime)
-            {
-                QCoreApplication::processEvents(QEventLoop::AllEvents, 100); // 延遲 0.7sec
-            }
-            // 消除原視窗
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100); // 延遲 0.7sec
+        }
+        // 消除原視窗
 
 ```
 
@@ -125,54 +125,54 @@ bool flag = 1; // 連接成功與否
 處理我方輸入
 ```C++
 if (ui->listWidget->count() % 2)
+{
+    if (isSending)
+    {
+        dealMessageTime(time);
+
+        QNChatMessage *messageW = new QNChatMessage(ui->listWidget->parentWidget());
+        QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
+        dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
+    }
+    else
+    {
+        bool isOver = true;
+        // 處理輸入文字
+        for (int i = ui->listWidget->count() - 1; i > 0; i--)
         {
-            if (isSending)
+            QNChatMessage *messageW = (QNChatMessage *)ui->listWidget->itemWidget(ui->listWidget->item(i));
+            if (messageW->text() == msg)
             {
-                dealMessageTime(time);
-
-                QNChatMessage *messageW = new QNChatMessage(ui->listWidget->parentWidget());
-                QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
-                dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
-            }
-            else
-            {
-                bool isOver = true;
-                // 處理輸入文字
-                for (int i = ui->listWidget->count() - 1; i > 0; i--)
-                {
-                    QNChatMessage *messageW = (QNChatMessage *)ui->listWidget->itemWidget(ui->listWidget->item(i));
-                    if (messageW->text() == msg)
-                    {
-                        isOver = false;
-                        messageW->setTextSuccess();
-                    }
-                }
-                // 處理時間文字
-                if (isOver)
-                {
-                    dealMessageTime(time);
-
-                    QNChatMessage *messageW = new QNChatMessage(ui->listWidget->parentWidget());
-                    QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
-                    dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
-                    messageW->setTextSuccess();
-                }
+                isOver = false;
+                messageW->setTextSuccess();
             }
         }
+        // 處理時間文字
+        if (isOver)
+        {
+            dealMessageTime(time);
+
+            QNChatMessage *messageW = new QNChatMessage(ui->listWidget->parentWidget());
+            QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
+            dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
+            messageW->setTextSuccess();
+        }
+    }
+}
 ```
 處理對方輸入
 ```C++
 else
-        {
-            if (msg != "")
-            {
-                dealMessageTime(time);
+{
+    if (msg != "")
+    {
+        dealMessageTime(time);
 
-                QNChatMessage *messageW = new QNChatMessage(ui->listWidget->parentWidget());
-                QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
-                dealMessage(messageW, item, msg, time, QNChatMessage::User_She);
-            }
-        }
+        QNChatMessage *messageW = new QNChatMessage(ui->listWidget->parentWidget());
+        QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
+        dealMessage(messageW, item, msg, time, QNChatMessage::User_She);
+    }
+}
 ```
 
 ### chatmessage.h、chatmessage.cpp
