@@ -1,0 +1,108 @@
+lineedit 字體改
+
+window 757 430
+----------------
+上邊框 
+
+0, 0, 761, 31
+
+background-color: rgb(90, 184, 255);
+corbel
+setText Register
+---------------------
+icon 30, 100, 181, 181
+---------------------------
+usr label
+
+240 80 121 31
+
+16 px
+corbel
+---------------------
+pwd label
+
+240 140 131 31
+--------------------------
+comfirm pwd label
+
+240 200 201 31
+---------------------
+email- label
+
+240 260 111 31
+------------------------
+invaild
+
+240 320 491 16
+
+9px corbel
+------------------------
+
+usr line edit
+
+460 80 271 31
+
+font Noto Sans CJK TC Bold
+
+padding : 2px
+font 14px
+--------------------------
+pwd line edit
+
+460 140 271 31
+----------------------------
+confirm pwd line edit
+
+460 200 271 31
+------------------------
+
+email line edit
+
+460 260 271 31
+
+--------------------
+
+cancel register label
+
+30, 350, 341, 51
+
+corbel
+
+16px
+
+background-color: rgb(102, 184, 255);
+color: rgb(255, 255, 255);
+
+---------------------
+
+confirm register
+
+390, 350, 341, 51
+------------------------
+
+minButton->setGeometry(555, 0, 21, 21);
+closeButton->setGeometry(580, 0, 21, 21);
+
+變成
+
+minButton->setGeometry(705, 0, 21, 21);
+closeButton->setGeometry(730, 0, 21, 21);
+
+-----------------
+
+success icon
+
+50 50 251 251
+
+success word
+
+330 140 341 81
+
+corbel
+
+20px
+
+
+
+
+

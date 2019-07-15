@@ -1,0 +1,39 @@
+控件相對位置
+
+標題
+
+Microsoft JhengHei
+
+color: rgb(255, 255, 255);
+background-color: rgba(0, 0, 0, 50);
+border-radius:16px;
+padding:4px 10px 4px 10px;
+
+3485536800
+
+944
+301
+301 92
+ time format
+QColor text_widget(0, 0, 0, 50);
+        painter.setBrush(QBrush(text_widget));
+        m_timeText_rect.setRect(this->rect().x() + this->width()/2 - 35, this->rect().y() + 10 , 70, 20);
+        painter.drawRoundedRect(m_timeText_rect, 10, 10);
+
+        QPen penText;
+        penText.setColor(QColor(255, 255, 255));
+        painter.setPen(penText);
+        QTextOption option(Qt::AlignCenter);
+        option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
+        QFont fontTime("Microsoft JhengHei", 9, QFont::Bold, false);
+        fontTime.setLetterSpacing(QFont::AbsoluteSpacing, 1);
+        painter.setFont(fontTime);
+        painter.drawText(this->rect(), m_curTime, option);
+
+30 90 651 470
+
+Microsoft JhengHei
+
+944 - 301 = 643
+
+468
