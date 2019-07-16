@@ -134,6 +134,9 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
                            "border-right: 0.5px solid #d7d6e3;padding: 20px;}");
     connect(friendManage, SIGNAL(clicked(QString)), this, SLOT(push_label(QString)));
 
+
+    ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
 }
 
 LLK::~LLK()
