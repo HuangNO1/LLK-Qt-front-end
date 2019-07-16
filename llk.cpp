@@ -78,15 +78,10 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
     // 設計 colseEvent 為最小化至托盤
     init(); // 初始化
 
-    // 設定 上傳icon
-    QPixmap *linkiconPix = new QPixmap(":/images/icon/link.png");
-    linkiconPix->scaled(ui->Linklabel->size(), Qt::KeepAspectRatio);
-    ui->Linklabel->setScaledContents(true);
-    ui->Linklabel->setPixmap(*linkiconPix);
 
     // 聊天框-----------------------------------------
     chat = new CHATMainWindow(this);
-    chat->setGeometry(301, 90, 651, 470);
+    chat->setGeometry(301, 90, 651, 490);
     chat->show();
 
     // 聊天列表----------------------------------------
@@ -118,6 +113,26 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
     ui->listView->setViewMode(QListView::ListMode); //设置Item列表显示
     ui->listView->setDragEnabled(false);            //控件不允许拖动
 
+    isSetting = false;
+    setting = new Nolabel("setting", this);
+    setting->setGeometry(ui->label_setting->x(), ui->label_setting->y(), 71, 71);
+    QPixmap *pixmap = new QPixmap(":/images/icon/Setting_before_clicked.png");
+    pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
+    setting->setScaledContents(true);
+    setting->setPixmap(*pixmap);
+    setting->setStyleSheet("QLabel {background-color: rgb(255, 255, 255);"
+                           "border-left: 0.5px solid #d7d6e3;padding: 20px;}");
+    connect(setting, SIGNAL(clicked(QString)), this, SLOT(push_label(QString)));
+
+    friendManage = new Nolabel("friendManage", this);
+    friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
+    pixmap = new QPixmap(":/images/icon/menu_showFriend.png");
+    pixmap->scaled(friendManage->size(), Qt::KeepAspectRatio);
+    friendManage->setScaledContents(true);
+    friendManage->setPixmap(*pixmap);
+    friendManage->setStyleSheet("QLabel {background-color: rgb(255, 255, 255);"
+                           "border-right: 0.5px solid #d7d6e3;padding: 20px;}");
+    connect(friendManage, SIGNAL(clicked(QString)), this, SLOT(push_label(QString)));
 
 }
 
@@ -125,6 +140,12 @@ LLK::~LLK()
 {
     delete ui;
 }
+
+void LLK::push_label(QString data)
+{
+
+}
+
 
 // 視窗真正關閉
 void LLK::windowClose()
@@ -178,6 +199,9 @@ void LLK::resizeEvent(QResizeEvent *event)
     ui->label_Status->setGeometry(301, 20, this->width() - 71, 71);
     ui->label_manage->setGeometry(this->width() - 71, 20, 71, 71);
     chat->setGeometry(301, 91, this->width() - 301, this->height() - 91);
+    setting->setGeometry(ui->label_setting->x(), ui->label_setting->y(), 71, 71);
+    friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
+
     // 設置最小化、關閉按鈕在界面的位置
     minButton->setGeometry(this->width() - 66, 0, 21, 21);
     maxButton->setGeometry(this->width() - 45, 0, 21, 21);
@@ -491,5 +515,12 @@ void LLK::initData()
         Item->setData(QVariant::fromValue(itemData),Qt::UserRole+1);//整体存取
 
         m_model->appendRow(Item);      //追加Item
+
+
     }
+}
+
+void LLK::on_listView_clicked(const QModelIndex &index)
+{
+    ui->label_Status->setText(getNameFromItems);
 }

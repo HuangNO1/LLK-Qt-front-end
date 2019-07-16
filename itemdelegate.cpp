@@ -20,8 +20,6 @@ ItemDelegate::~ItemDelegate()
 
 void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-
-
     if(index.isValid())
     {
         painter->save();
@@ -69,6 +67,7 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
             isSelect = true;
             isMouseOver = false;
             isNoAction = false;
+            getNameFromItems = data.name;
         }
         else if(option.state.testFlag(QStyle::State_MouseOver))
         {
@@ -124,6 +123,7 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
             painter->setPen(QPen(Qt::white));
             painter->setFont(QFont("Microsoft JhengHei", 10));
             painter->drawText(telRect,Qt::AlignLeft,data.tel); //绘制最新訊息
+
         }
         if(isMouseOver == true || isNoAction == true)
         {
@@ -143,5 +143,5 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 
 QSize ItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    return QSize(160, 80);
+    return QSize(160, 70);
 }

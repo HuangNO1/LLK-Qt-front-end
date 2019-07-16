@@ -20,6 +20,7 @@
 #include <QMainWindow>
 #include <QMenu>
 #include <QMessageBox>
+#include <QModelIndex>
 #include <QPropertyAnimation>
 #include <QPushButton>
 #include <QResizeEvent>
@@ -108,12 +109,20 @@ private:
     // 聊天框
     CHATMainWindow *chat;
 
+    Nolabel *setting;     // setting 按鈕
+    Nolabel *friendManage; // 好友管理按鈕
+    bool isSetting;        // 判斷 setting 是否被按下
+
 private slots:
     void windowClose(); // 視窗關閉
     void windowMax();   // 視窗最大化按鈕兩段設計
     void windowHide();  // 視窗隱藏
 
+    void push_label(QString); // 按下 label 接收訊號
+
     // 設計 colseEvent 為最小化至托盤----------------------------------------
+    void on_listView_clicked(const QModelIndex &index);
+
 public:
     void init(); //初始化函数
 
@@ -138,7 +147,7 @@ private:
     ItemDelegate *m_delegate;                 //委托
     QSortFilterProxyModel* m_proxyModel;
     QStandardItemModel *m_model;
-    int totalNum;
+    QString totalNum;
     int redNum;
     int blueNum;
     int yellowNum;

@@ -12,9 +12,17 @@ CHATMainWindow::CHATMainWindow(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     ui->label_tip->setGeometry(this->width() / 2 - ui->label_tip->width() / 2,
-                               this->height() / 2 - ui->label_tip->height() / 2 - 60,
+                               this->height() / 2 - ui->label_tip->height() / 2 - 30,
                                ui->label_tip->width(), ui->label_tip->height());
-
+    link = new Nolabel("link", this);
+    link->setGeometry(0, this->height() - 60, 60, 60);
+    QPixmap *pixmap = new QPixmap(":/images/icon/link.png");
+    pixmap->scaled(link->size(), Qt::KeepAspectRatio);
+    link->setScaledContents(true);
+    link->setPixmap(*pixmap);
+    link->setStyleSheet("QLabel {background-color: rgb(255, 255, 255);"
+                        "border-bottom: 0.5px solid #d7d6e3;"
+                        "border-left: 0.5px solid #d7d6e3;padding: 15px;}");
 }
 
 CHATMainWindow::~CHATMainWindow()
@@ -112,11 +120,13 @@ void CHATMainWindow::resizeEvent(QResizeEvent *event)
     ui->widget->setGeometry(0, 0,this->width(), this->height());
     ui->listWidget->setGeometry(0,0, this->width(), this->height() - 60);
     ui->textEdit->setGeometry(60, this->height() - 60, this->width() - 60, 60);
-
+    link->setGeometry(0, this->height() - 60, 60, 60);
     //ui->pushButton->move(ui->textEdit->width()+ui->textEdit->x() - ui->pushButton->width() - 10,
     //                     ui->textEdit->height()+ui->textEdit->y() - ui->pushButton->height() - 10);
 
-
+    ui->label_tip->setGeometry(this->width() / 2 - ui->label_tip->width() / 2,
+                               this->height() / 2 - ui->label_tip->height() / 2 - 30,
+                               ui->label_tip->width(), ui->label_tip->height());
     for(int i = 0; i < ui->listWidget->count(); i++) {
         QNChatMessage* messageW = (QNChatMessage*)ui->listWidget->itemWidget(ui->listWidget->item(i));
         QListWidgetItem* item = ui->listWidget->item(i);
@@ -157,6 +167,7 @@ void CHATMainWindow::keyPressEvent(QKeyEvent *event)
             else
             {
                 bool isOver = true;
+                // 處理輸入文字
                 for (int i = ui->listWidget->count() - 1; i > 0; i--)
                 {
                     QNChatMessage *messageW = (QNChatMessage *)ui->listWidget->itemWidget(ui->listWidget->item(i));
@@ -166,6 +177,7 @@ void CHATMainWindow::keyPressEvent(QKeyEvent *event)
                         messageW->setTextSuccess();
                     }
                 }
+                // 處理時間文字
                 if (isOver)
                 {
                     dealMessageTime(time);

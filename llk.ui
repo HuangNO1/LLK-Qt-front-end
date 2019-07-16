@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>944</width>
-    <height>560</height>
+    <height>581</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>806</width>
-    <height>560</height>
+    <height>581</height>
    </size>
   </property>
   <property name="font">
@@ -50,7 +50,7 @@
       <x>0</x>
       <y>92</y>
       <width>301</width>
-      <height>468</height>
+      <height>490</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -84,101 +84,6 @@
      <enum>QAbstractItemView::SingleSelection</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="Linklabel">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>500</y>
-      <width>60</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>60</width>
-      <height>60</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>61</width>
-      <height>61</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
-border-bottom: 0.5px solid #d7d6e3;
-border-left: 0.5px solid #d7d6e3;
-padding: 15px;</string>
-    </property>
-    <property name="text">
-     <string>link</string>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>90</y>
-      <width>641</width>
-      <height>411</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft JhengHei</family>
-      <pointsize>10</pointsize>
-      <kerning>false</kerning>
-     </font>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border: 0.5px solid #d7d6e3;
-background-color : rgb(102, 184, 255);
-</string>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
-    </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAsNeeded</enum>
-    </property>
-    <property name="horizontalScrollBarPolicy">
-     <enum>Qt::ScrollBarAsNeeded</enum>
-    </property>
-    <property name="autoScroll">
-     <bool>true</bool>
-    </property>
-    <property name="autoScrollMargin">
-     <number>0</number>
-    </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
-    </property>
-    <property name="selectionMode">
-     <enum>QAbstractItemView::NoSelection</enum>
-    </property>
-    <property name="verticalScrollMode">
-     <enum>QAbstractItemView::ScrollPerItem</enum>
-    </property>
-    <property name="horizontalScrollMode">
-     <enum>QAbstractItemView::ScrollPerPixel</enum>
-    </property>
-    <property name="movement">
-     <enum>QListView::Static</enum>
-    </property>
-    <property name="isWrapping" stdset="0">
-     <bool>true</bool>
-    </property>
-    <property name="resizeMode">
-     <enum>QListView::Adjust</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_Status">
     <property name="geometry">
      <rect>
@@ -190,45 +95,6 @@ background-color : rgb(102, 184, 255);
     </property>
     <property name="text">
      <string>status</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>500</y>
-      <width>584</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft JhengHei</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">padding: 15px soild white;
-padding-left:20px;
-background-color: rgb(255, 255, 255);
-border-color: rgb(255, 255, 255);
-border-width:0;border-style:outset;
-border-bottom: 1px solid #d7d6e3;
-border-right: 1px solid #d7d6e3;</string>
-    </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="horizontalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="lineWrapMode">
-     <enum>QTextEdit::NoWrap</enum>
-    </property>
-    <property name="placeholderText">
-     <string>Write a message.</string>
     </property>
    </widget>
    <widget class="QListView" name="listView_noAction">
@@ -302,7 +168,7 @@ padding:9px;
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>270</y>
+      <y>300</y>
       <width>305</width>
       <height>32</height>
      </rect>
@@ -326,10 +192,7 @@ padding:4px 10px 4px 10px;</string>
    </widget>
    <zorder>listView_noAction</zorder>
    <zorder>label</zorder>
-   <zorder>textEdit</zorder>
    <zorder>listView</zorder>
-   <zorder>Linklabel</zorder>
-   <zorder>listWidget</zorder>
    <zorder>label_Status</zorder>
    <zorder>label_manage</zorder>
    <zorder>label_setting</zorder>

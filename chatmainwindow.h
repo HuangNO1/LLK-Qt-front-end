@@ -5,6 +5,7 @@
 #include <QListWidgetItem>
 #include <QKeyEvent>
 #include "chatmessage.h"
+#include "mylabel.h"
 using namespace std;
 
 
@@ -30,5 +31,6 @@ private slots:
 
 private:
     Ui::CHATMainWindow *ui;
+    Nolabel *link;
 };
 #endif // CHATMAINWINDOW_H

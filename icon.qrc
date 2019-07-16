@@ -19,5 +19,8 @@
         <file>icon/link.png</file>
         <file>icon/CustomerCopy.png</file>
         <file>icon/loading4.gif</file>
+        <file>icon/menu_showFriend.png</file>
+        <file>icon/Setting_after_clicked.png</file>
+        <file>icon/Setting_before_clicked.png</file>
     </qresource>
 </RCC>

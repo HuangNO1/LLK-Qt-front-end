@@ -4,10 +4,12 @@
 #include <QModelIndex>
 #include <QStandardItemModel>
 #include "itemdef.h"
+static QString getNameFromItems;
+
 class ItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
-signals:
+//signals:
 
 public:
     explicit ItemDelegate(QObject *parent = 0);
@@ -16,8 +18,6 @@ public:
     //重写重画函数
     void paint(QPainter * painter,const QStyleOptionViewItem & option,const QModelIndex & index) const;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
-
-private:
 
 };
 

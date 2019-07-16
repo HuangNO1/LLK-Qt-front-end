@@ -46,6 +46,15 @@ LLK-Qt-front-end
 - Nolabel - 無特效功能，適用於點擊頭像開啟文件更換頭像或是點擊任何帶有圖標的按鈕
 > 註：該類發射信號帶有 QString 參數，發射內容為 `label->text()`，也就是按鈕上的文字，可作為接收信號時的按鈕類型作判斷，並給予執行相對應的程序
 
+使用演示：
+
+1. 於需要添加的頭文件添加 `#include "mylabel";`
+2. 在需要的 Class 裡的私有區域加上 `Mylabel *example;`，於`private slots:`添加`void push_button(QString);`
+3. 在構造函數裡添加`example = new MyLabel("Example", this);`
+4. 接下來就按照自己的需求設定其樣式
+5. 在 `push_button(QString data)`裡設定如果 data 等於哪個值則執行哪些程序（data 可以是 example 按鈕上的文字 -- "Example"，因為這個函式可以接收多個訊號）
+
+
 ### register.h、register.cpp
 
 兩文件為製作註冊頁面的參考設計，只有用到該 UI 介面的設計，可以考慮刪除這兩文件以及其 UI 文件 register.ui
