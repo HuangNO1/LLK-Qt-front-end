@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
+QT       += websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,7 +35,8 @@ SOURCES += \
     register.cpp \
     chatmessage.cpp \
     chatmainwindow.cpp \
-    itemdelegate.cpp
+    itemdelegate.cpp \
+    tcpserver.cpp
 
 HEADERS += \
         llk.h \
@@ -44,14 +47,16 @@ HEADERS += \
     chatmessage.h \
     chatmainwindow.h \
     itemdef.h \
-    itemdelegate.h
+    itemdelegate.h \
+    tcpserver.h
 
 FORMS += \
         llk.ui \
     logindialog.ui \
     connecttoserver.ui \
     register.ui \
-    chatmainwindow.ui
+    chatmainwindow.ui \
+    tcpserver.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

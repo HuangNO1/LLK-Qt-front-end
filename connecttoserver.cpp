@@ -63,6 +63,11 @@ ConnectToServer::ConnectToServer(QWidget *parent) :
 
     connect(Connect, SIGNAL(clicked(QString)), this, SLOT(ConnectSuccess(QString)));
     connect(Connect, SIGNAL(clicked(QString)), this, SLOT(restore(QString)));
+
+    dataRecvWS = Q_NULLPTR;
+    flag = false;
+    m_timer = new QTimer();
+
 }
 
 ConnectToServer::~ConnectToServer()
@@ -95,6 +100,7 @@ void ConnectToServer::closeWindows(QString data)
 
 void ConnectToServer::ConnectSuccess(QString)
 {
+    createDataRecvWS();
     // 成功
     if(flag == true)
     {
@@ -102,7 +108,7 @@ void ConnectToServer::ConnectSuccess(QString)
         ui->serverlabel->setVisible(false);
         ui->Port_spinBox->setVisible(false);
         ui->Server_lineEdit->setVisible(false);
-        Connect->setText(tr("Change"));
+        //Connect->setText(tr("Change"));
         QPixmap *pixmap = new QPixmap(":/images/icon/success.png");
         pixmap->scaled(ui->label_connectSuccess->size(), Qt::KeepAspectRatio);
         ui->label_connectSuccess->setScaledContents(true);
@@ -186,4 +192,65 @@ void ConnectToServer::closeEvent(QCloseEvent *event)
 bool ConnectToServer::getFlag()
 {
     return flag;
+}
+
+
+/**
+ * @breaf 创建WebSocket连接
+ */
+void ConnectToServer::createDataRecvWS(){
+    if(dataRecvWS == Q_NULLPTR){
+        dataRecvWS = new QWebSocket();
+        qDebug()<<"create websocket!";
+        connect(dataRecvWS, &QWebSocket::disconnected, this, &ConnectToServer::onDisConnected, Qt::AutoConnection);
+        connect(dataRecvWS, &QWebSocket::textMessageReceived, this, &ConnectToServer::onTextReceived, Qt::AutoConnection);
+        connect(dataRecvWS, &QWebSocket::connected, this, &ConnectToServer::onConnected, Qt::AutoConnection);
+        connect(m_timer, &QTimer::timeout, this, &ConnectToServer::reconnect, Qt::AutoConnection);
+
+        //dataRecvWS->open(QUrl("ws://localhost:8080"));
+        QString url = tr("ws://") + ui->Server_lineEdit->text() + tr(":") + ui->Port_spinBox->text();
+        dataRecvWS->open(QUrl(url));
+    }
+}
+
+/**
+ * @breaf 判断连接状态
+ * @note  当连接成功后，触发该函数
+ */
+void ConnectToServer::onConnected(){
+    flag = true;
+    qDebug()<<"DataReveive websocket is already connect!";
+    m_timer->stop();
+    qDebug()<<"Address："<<dataRecvWS->peerAddress();
+}
+
+/**
+ * @breaf 数据处理函数
+ * @param msg，数据信息
+ * @note  当收到服务端发送的数据时，触发该函数
+ */
+void ConnectToServer::onTextReceived(QString msg){
+    qDebug()<<"----------------data-----------------";
+    qDebug()<<msg;
+}
+
+/**
+ * @breaf 连接断开
+ * @note  当连接断开时，触发该函数
+ */
+void ConnectToServer::onDisConnected(){
+    flag = false;
+    qDebug()<<"DataReceive websocket is disconnected!!!";
+    m_timer->start(3000);/*-<当连接失败时，触发重连计时器，设置计数周期为3秒 */
+}
+
+/**
+ * @breaf 周期重连函数
+ * @note  连接建立成功时，调用该函数
+ */
+void ConnectToServer::reconnect(){
+    flag = false;
+    qDebug()<<"try to reconnect!";
+    dataRecvWS->abort();
+    dataRecvWS->open(QUrl("ws://localhost:8080"));
 }

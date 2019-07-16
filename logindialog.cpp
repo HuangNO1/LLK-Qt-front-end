@@ -247,7 +247,9 @@ loginDialog::loginDialog(QWidget *parent) : QDialog(parent),
 
     registerSuccess = false;
     //------------------------------------------------
+
 }
+
 
 loginDialog::~loginDialog()
 {

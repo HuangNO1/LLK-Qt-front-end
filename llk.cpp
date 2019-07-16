@@ -332,6 +332,7 @@ void LLK::windowHide()
 void LLK::TrayIconAction(QSystemTrayIcon::ActivationReason reason)
 /* 参数是Qt的保留字，表示对托盘图标的操作，该槽函数功能只实现了单击功能，可以实现其他功能比如双击、中击，具体可查文档或者Qt自带demo(关键字tray) */
 {
+    //if()
     switch (reason)
     {
     /* 如果对icon進行點擊，則顯示正常大小的窗口 */

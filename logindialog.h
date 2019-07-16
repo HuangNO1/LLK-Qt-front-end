@@ -104,6 +104,8 @@ private:
 private slots:
     void button_click(QString);
     void windowClose(); // 視窗關閉
+
+
 };
 
 #endif // LOGINDIALOG_H

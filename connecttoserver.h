@@ -15,8 +15,13 @@
 #include <QTime>
 #include <QToolButton>
 #include <QWidget>
-#include <Qstring>
+#include <QString>
 #include <iostream>
+#include <QtCore/QObject>
+#include <QWebSocket>
+#include <QTimer>
+
+
 using namespace std;
 static QString Ip = QString::fromStdString("127.0.0.1");
 static int Port = 8080;
@@ -49,7 +54,24 @@ private:
     Ui::ConnectToServer *ui;
     Mylabel *Quit;
     Mylabel *Connect;
-    bool flag = 1; // 連接成功與否
+
+    //--連網----------------------------
+
+public slots:
+    void createDataRecvWS();    /*-<创建websocket连接 */
+
+private:
+    QWebSocket *dataRecvWS;     /*-<websocket类 */
+    bool flag;         /*-<websocket连接状态，连接成功：true；断开：false */
+    void reconnect();           /*-<周期重连函数 */
+    QTimer *m_timer;            /*-<周期重连Timer */
+
+
+private slots:
+    void onConnected();                 /*-<socket建立成功后，触发该函数 */
+    void onTextReceived(QString msg);   /*-<收到Sev端的数据时，触发该函数 */
+    void onDisConnected();              /*-<socket连接断开后，触发该函数 */
+
 };
 
 #endif // CONNECTTOSERVER_H
