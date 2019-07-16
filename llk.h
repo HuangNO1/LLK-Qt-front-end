@@ -123,6 +123,8 @@ private slots:
     // 設計 colseEvent 為最小化至托盤----------------------------------------
     void on_listView_clicked(const QModelIndex &index);
 
+    void on_lineEditSearch_textChanged(const QString &arg1);
+
 public:
     void init(); //初始化函数
 

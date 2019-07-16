@@ -524,3 +524,8 @@ void LLK::on_listView_clicked(const QModelIndex &index)
 {
     ui->label_Status->setText(getNameFromItems);
 }
+
+void LLK::on_lineEditSearch_textChanged(const QString &arg1)
+{
+    QString str = ui->lineEditSearch->text();
+}

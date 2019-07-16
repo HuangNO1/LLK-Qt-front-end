@@ -94,7 +94,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>status</string>
+     <string/>
     </property>
    </widget>
    <widget class="QListView" name="listView_noAction">
