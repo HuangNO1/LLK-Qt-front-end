@@ -38,6 +38,8 @@ SettingDialog::SettingDialog(QWidget *parent) :
     SignOut->setFont(ft);
     connect(SignOut, SIGNAL(clicked(QString)), this, SLOT(button_click(QString)));
     clickLogout = false;
+
+    //Server = new
 }
 
 SettingDialog::~SettingDialog()

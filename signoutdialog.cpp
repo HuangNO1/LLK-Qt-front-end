@@ -40,6 +40,7 @@ void SignOutDialog::button_click(QString data)
     if (data == QString::fromStdString("Cancel")) // 取消 鈕被按
     {
         this->setVisible(false);
+        emit Cancel_LLK();
     }
     if(data == QString::fromStdString("Log Out")) // LogOut 鈕被按
     {

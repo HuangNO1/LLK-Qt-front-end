@@ -238,9 +238,7 @@ padding:4px 10px 4px 10px;</string>
      </size>
     </property>
     <property name="font">
-     <font>
-      <family>Microsoft JhengHei</family>
-     </font>
+     <font/>
     </property>
     <property name="styleSheet">
      <string notr="true">padding-left: 20px;

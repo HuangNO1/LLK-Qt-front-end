@@ -20,6 +20,7 @@ private slots:
     void button_click(QString);
 signals:
     void LouOut_LLK();
+    void Cancel_LLK();
 
 private:
     Ui::SignOutDialog *ui;

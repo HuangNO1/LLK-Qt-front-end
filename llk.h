@@ -45,6 +45,7 @@
 #include <QSortFilterProxyModel>
 #include "itemdelegate.h"
 #include "signoutdialog.h"
+#include "blockuserdialog.h"
 #define PADDING 5
 
 // 判斷滑鼠的在視窗的位置
@@ -115,6 +116,11 @@ private:
     FRIENDlabel *friendManage; // 好友管理按鈕
     bool isSetting;        // 判斷 setting 是否被按下
     SettingDialog *LLKSetting; // 設定視窗
+    SignOutDialog *logout; // 登出視窗選擇窗
+    QLabel *gray; // 登出視窗出現後改變聊天視窗
+    whitelabel *BlockUser; // 刪除好友
+    bool isMANAGE;  // 判斷刪除好友鍵
+    BlockUserDialog *BLOCK; // 刪除好友確認視窗
 
 
 private slots:
@@ -128,6 +134,11 @@ private slots:
     void SettingDialogIsClose(); // 設定鍵被關閉
 
     void LogOut_FROM_LLK(); // 關閉主程序
+
+    void Cancel_LogOut_LLK(); // 取消登出並背景顏色恢復
+
+    void Block_user();
+    void Cancel_Block_user();
 
     // 設計 colseEvent 為最小化至托盤----------------------------------------
     void on_listView_clicked(const QModelIndex &index);
@@ -162,7 +173,7 @@ private:
     int redNum;
     int blueNum;
     int yellowNum;
-    SignOutDialog *logout;
+
     void initData();
     void updateButtonNum();
 };

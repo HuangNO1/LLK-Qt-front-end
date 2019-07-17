@@ -128,7 +128,7 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
 
     friendManage = new FRIENDlabel("friendManage", this);
     friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
-    pixmap = new QPixmap(":/images/icon/menu_showFriend.png");
+    pixmap = new QPixmap(":/images/icon/menu1.png");
     pixmap->scaled(friendManage->size(), Qt::KeepAspectRatio);
     friendManage->setScaledContents(true);
     friendManage->setPixmap(*pixmap);
@@ -144,13 +144,43 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
     LLKSetting->setVisible(false);
     connect(LLKSetting, SIGNAL(isCloseSetting()), this, SLOT(SettingDialogIsClose()));
 
+    gray = new QLabel("", this);
+    gray->setStyleSheet("QLabel{background-color:rgba(0,0,0,0);}"); // 透明
+    gray->setGeometry(0, 20,this->width(), this->height() - 21);
+    gray->setVisible(false);
+
     // 登出視窗
     logout = new SignOutDialog(this);
-    logout->setGeometry(350, 100, 500, 280);
+    logout->setGeometry(this->width()/2 - 250, this->height()/2 - 140, 500, 280);
     logout->setVisible(false);
+    logout->setWindowFlags(Qt::WindowStaysOnTopHint);
 
     connect(logout, SIGNAL(LouOut_LLK()), this, SLOT(LogOut_FROM_LLK()));
+    connect(logout, SIGNAL(Cancel_LLK()), this, SLOT(Cancel_LogOut_LLK()));
 
+    BLOCK = new BlockUserDialog(this);
+    BLOCK->setGeometry(this->width()/2 - 250, this->height()/2 - 140, 500, 280);
+    BLOCK->setVisible(false);
+    BLOCK->setWindowFlags(Qt::WindowStaysOnTopHint);
+
+    connect(BLOCK, SIGNAL(confirm_BLOCK()), this, SLOT(Block_user()));
+    connect(BLOCK, SIGNAL(Cancel_BLOCK()), this, SLOT(Cancel_Block_user()));
+
+
+
+    // 刪除好友設置
+    QFont ft;
+    ft.setPointSize(10);
+    ft.setFamily("Corbel");
+
+    BlockUser = new whitelabel("Block user",this);
+    BlockUser->setGeometry(QRect(this->width() - 124, 80, 121, 51));
+    BlockUser->setAlignment(Qt::AlignCenter); // 文字靠左
+    BlockUser->setStyleSheet("QLabel { background-color : white; color : black;padding:15px;border: 1px solid #d7d6e3;}");
+    BlockUser->setFont(ft);
+    BlockUser->setVisible(false);
+    connect(BlockUser, SIGNAL(clicked(QString)), this, SLOT(push_label(QString)));
+    isMANAGE = false;
 }
 
 LLK::~LLK()
@@ -182,6 +212,42 @@ void LLK::push_label(QString data)
             isSetting = false;
         }
     }
+    if(data == QString::fromStdString("friendManage"))
+    {
+        qDebug() << "friendManage";
+        if(isMANAGE == false && m_delegate->getEMAIL() != (""))
+        {
+            qDebug() << "open block user";
+            QPixmap *pixmap = new QPixmap(":/images/icon/menu2.png");
+            pixmap->scaled(friendManage->size(), Qt::KeepAspectRatio);
+            friendManage->setScaledContents(true);
+            friendManage->setPixmap(*pixmap);
+            BlockUser->setVisible(true);
+            isMANAGE = true;
+        }
+        else {
+            qDebug() << "close block user";
+            QPixmap *pixmap = new QPixmap(":/images/icon/menu1.png");
+            pixmap->scaled(friendManage->size(), Qt::KeepAspectRatio);
+            friendManage->setScaledContents(true);
+            friendManage->setPixmap(*pixmap);
+            BlockUser->setVisible(false);
+            isMANAGE = false;
+        }
+    }
+    if(data == QString::fromStdString("Block user"))
+    {
+        QPixmap *pixmap = new QPixmap(":/images/icon/menu1.png");
+        pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
+        friendManage->setScaledContents(true);
+        friendManage->setPixmap(*pixmap);
+        BlockUser->setVisible(false);
+        isMANAGE = false;
+
+        BLOCK->setVisible(true);
+        gray->setVisible(true);
+        gray->setStyleSheet("QLabel{background-color:rgba(0,0,0,80);}");
+    }
 }
 
 void LLK::SettingDialogIsClose()
@@ -195,7 +261,27 @@ void LLK::SettingDialogIsClose()
     if(LLKSetting->clickLogout == true)
     {
         logout->setVisible(true);
+        gray->setVisible(true);
+        gray->setStyleSheet("QLabel{background-color:rgba(0,0,0,80);}");
+        logout->setWindowFlags(Qt::WindowStaysOnTopHint);
     }
+}
+
+void LLK::Cancel_LogOut_LLK()
+{
+    gray->setVisible(false);
+    gray->setStyleSheet("QLabel{background-color:rgba(0,0,0,0);}");
+}
+
+void LLK::Block_user()
+{
+    gray->setVisible(false);
+    gray->setStyleSheet("QLabel{background-color:rgba(0,0,0,0);}");
+}
+void LLK::Cancel_Block_user()
+{
+    gray->setVisible(false);
+    gray->setStyleSheet("QLabel{background-color:rgba(0,0,0,0);}");
 }
 
 // 視窗真正關閉
@@ -270,7 +356,10 @@ void LLK::resizeEvent(QResizeEvent *event)
     setting->setGeometry(0, 20, 71, 71);
     friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
     LLKSetting->setGeometry(ui->listView->x() + 0.5, ui->listView->y() + 0.5, ui->listView->width() - 1, ui->listView->height() - 0.5);
-    logout->setGeometry(350, 100, 500, 280);
+    logout->setGeometry(this->width()/2 - 250, this->height()/2 - 140, 500, 280);
+    gray->setGeometry(0, 20,this->width(), this->height() - 21);
+    BLOCK->setGeometry(this->width()/2 - 250, this->height()/2 - 140, 500, 280);
+    BlockUser->setGeometry(QRect(this->width() - 124, 80, 121, 51));
     // 設置最小化、關閉按鈕在界面的位置
     minButton->setGeometry(this->width() - 66, 0, 21, 21);
     maxButton->setGeometry(this->width() - 45, 0, 21, 21);
