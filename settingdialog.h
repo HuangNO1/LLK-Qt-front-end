@@ -16,6 +16,7 @@ class SettingDialog : public QDialog
 public:
     explicit SettingDialog(QWidget *parent = nullptr);
     ~SettingDialog();
+    bool clickLogout;
 signals:
     void isCloseSetting(); // 發射視窗是否被關閉
 
@@ -29,7 +30,7 @@ private:
     Ui::SettingDialog *ui;
     whitelabel *connectNetWork; // 連 server 按鈕
     whiteToRedlabel *SignOut; // 登出按鈕
-    ConnectToServer *Server; // 連服務視窗
+    //ConnectToServer *Server; // 連服務視窗
 
 };
 

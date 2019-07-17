@@ -141,6 +141,7 @@ void CHATMainWindow::keyPressEvent(QKeyEvent *event)
     //ctrl + Enter键
     if (event->modifiers() == Qt::ControlModifier && (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter))
     {
+        ui->label_tip->setVisible(false);
         QString msg = ui->textEdit->toPlainText();
         string tempMSG = msg.toStdString();
         // 去 ctrl 和 \n

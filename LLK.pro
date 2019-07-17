@@ -37,7 +37,8 @@ SOURCES += \
     chatmainwindow.cpp \
     itemdelegate.cpp \
     tcpserver.cpp \
-    settingdialog.cpp
+    settingdialog.cpp \
+    signoutdialog.cpp
 
 HEADERS += \
         llk.h \
@@ -50,7 +51,8 @@ HEADERS += \
     itemdef.h \
     itemdelegate.h \
     tcpserver.h \
-    settingdialog.h
+    settingdialog.h \
+    signoutdialog.h
 
 FORMS += \
         llk.ui \
@@ -59,7 +61,8 @@ FORMS += \
     register.ui \
     chatmainwindow.ui \
     tcpserver.ui \
-    settingdialog.ui
+    settingdialog.ui \
+    signoutdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

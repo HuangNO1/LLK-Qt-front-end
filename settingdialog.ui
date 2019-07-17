@@ -20,7 +20,8 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">background-color: rgb(255, 255, 255);
+</string>
   </property>
   <widget class="QLabel" name="background_label">
    <property name="geometry">
@@ -104,8 +105,7 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">padding:8px;
-color: rgba(88, 88, 88, 244);</string>
+    <string notr="true">padding:8px;</string>
    </property>
    <property name="text">
     <string>LLK Desktop Version0.0.1</string>

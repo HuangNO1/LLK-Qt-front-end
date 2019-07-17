@@ -44,6 +44,7 @@
 #include <QObjectUserData>
 #include <QSortFilterProxyModel>
 #include "itemdelegate.h"
+#include "signoutdialog.h"
 #define PADDING 5
 
 // 判斷滑鼠的在視窗的位置
@@ -91,7 +92,7 @@ private:
     QPoint mouseStartPoint;                 // 滑鼠初始位置
     QPoint windowTopLeftPoint;              // 窗口初始位置
     void region(const QPoint &cursorPoint); // 縮放事件
-    Nolabel *title;                         // 邊框
+    //QLabel *title;                         // 邊框
 
     // 無窗口下的拖動與縮放
 private:
@@ -111,7 +112,7 @@ private:
     CHATMainWindow *chat;
 
     Nolabel *setting;     // setting 按鈕
-    Nolabel *friendManage; // 好友管理按鈕
+    FRIENDlabel *friendManage; // 好友管理按鈕
     bool isSetting;        // 判斷 setting 是否被按下
     SettingDialog *LLKSetting; // 設定視窗
 
@@ -124,7 +125,9 @@ private slots:
     void push_label(QString); // 按下 label 接收訊號
 
 
-    void SettingDialogIsClose();
+    void SettingDialogIsClose(); // 設定鍵被關閉
+
+    void LogOut_FROM_LLK(); // 關閉主程序
 
     // 設計 colseEvent 為最小化至托盤----------------------------------------
     void on_listView_clicked(const QModelIndex &index);
@@ -159,7 +162,7 @@ private:
     int redNum;
     int blueNum;
     int yellowNum;
-
+    SignOutDialog *logout;
     void initData();
     void updateButtonNum();
 };

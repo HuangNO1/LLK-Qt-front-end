@@ -32,6 +32,26 @@ protected:
     void leaveEvent(QEvent *);                  // 滑鼠移出
 };
 
+class REDlabel : public QLabel
+{
+    Q_OBJECT
+public:
+    REDlabel(const QString &text, QWidget *parent = 0);
+    ~REDlabel() {}
+signals:
+    void clicked(QString);
+
+    /*
+public slots:
+    void slotClicked();
+*/
+protected:
+    void mousePressEvent(QMouseEvent *event);   // 滑鼠點擊
+    void mouseMoveEvent(QMouseEvent *event);    // 滑鼠點擊後移動
+    void mouseReleaseEvent(QMouseEvent *event); // 滑鼠釋放
+    void enterEvent(QEvent *);                  // 滑鼠移入
+    void leaveEvent(QEvent *);                  // 滑鼠移出
+};
 // 無點擊特效，專門為 LLK 頁面setting 的label
 class Nolabel : public QLabel
 {
@@ -96,4 +116,25 @@ protected:
     void enterEvent(QEvent *);                  // 滑鼠移入
     void leaveEvent(QEvent *);                  // 滑鼠移出
 };
+class FRIENDlabel : public QLabel
+{
+    Q_OBJECT
+public:
+    FRIENDlabel(const QString &text, QWidget *parent = 0);
+    ~FRIENDlabel() {}
+signals:
+    void clicked(QString);
+
+    /*
+public slots:
+    void slotClicked();
+*/
+protected:
+    void mousePressEvent(QMouseEvent *event); // 滑鼠點擊
+    /*void mouseMoveEvent(QMouseEvent *event);  // 滑鼠點擊後移動
+    void mouseReleaseEvent(QMouseEvent *event); // 滑鼠釋放
+    */
+};
 #endif // MYLABEL_H
+
+

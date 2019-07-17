@@ -31,12 +31,13 @@ SettingDialog::SettingDialog(QWidget *parent) :
     connectNetWork->setFont(ft);
     connect(connectNetWork, SIGNAL(clicked(QString)), this, SLOT(button_click(QString)));
 
-    SignOut = new whiteToRedlabel("Sign Out", this);
+    SignOut = new whiteToRedlabel("Log Out", this);
     SignOut->setGeometry(QRect(0, 181, 301, 60));
     SignOut->setAlignment(Qt::AlignLeft); // 文字靠左
     SignOut->setStyleSheet("QLabel { background-color : white; color : black;padding:15px;}");
     SignOut->setFont(ft);
     connect(SignOut, SIGNAL(clicked(QString)), this, SLOT(button_click(QString)));
+    clickLogout = false;
 }
 
 SettingDialog::~SettingDialog()
@@ -49,19 +50,19 @@ void SettingDialog::button_click(QString data)
     if (data == QString::fromStdString("Connect To Server")) // connectNetWork 鈕被按
     {
         qDebug() << "Connect To Server";
-        Server = new ConnectToServer(this);
+        //Server = new ConnectToServer(this);
         this->setVisible(false);
         connectNetWork->setAlignment(Qt::AlignLeft); // 文字靠左
         connectNetWork->setStyleSheet("QLabel { background-color : white; color : black;padding:15px;}");
-
+        clickLogout = false;
     }
-    if(data == QString::fromStdString("Sign Out")) // SignOut 鈕被按
+    if(data == QString::fromStdString("Log Out")) // SignOut 鈕被按
     {
-        qDebug() << "Sign Out";
+        qDebug() << "Log Out";
         this->setVisible(false);
         SignOut->setAlignment(Qt::AlignLeft); // 文字靠左
         SignOut->setStyleSheet("QLabel { background-color : white; color : black;padding:15px;}");
-
+        clickLogout = true;
     }
     emit isCloseSetting();
 }

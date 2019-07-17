@@ -19,7 +19,9 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
     ui->listWidget->verticalScrollBar()->setStyleSheet(stylesheet);
     file.close();
     */
+
     // 無邊框窗口
+
     setWindowFlags(Qt::FramelessWindowHint);
     //如果啟用了滑鼠追蹤，即使沒有按下按鈕，控件也會接收到鼠標移動事件。
     setMouseTracking(true);
@@ -124,22 +126,31 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
                            "border-left: 0.5px solid #d7d6e3;padding: 20px;}");
     connect(setting, SIGNAL(clicked(QString)), this, SLOT(push_label(QString)));
 
-    friendManage = new Nolabel("friendManage", this);
+    friendManage = new FRIENDlabel("friendManage", this);
     friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
     pixmap = new QPixmap(":/images/icon/menu_showFriend.png");
     pixmap->scaled(friendManage->size(), Qt::KeepAspectRatio);
     friendManage->setScaledContents(true);
     friendManage->setPixmap(*pixmap);
     friendManage->setStyleSheet("QLabel {background-color: rgb(255, 255, 255);"
-                           "border-right: 0.5px solid #d7d6e3;padding: 20px;}");
+                                "border-right: 0.5px solid #d7d6e3;padding: 20px;}");
     connect(friendManage, SIGNAL(clicked(QString)), this, SLOT(push_label(QString)));
 
-
+    // 取消雙點擊編輯
     ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     LLKSetting = new SettingDialog(this);
-    LLKSetting->setGeometry(ui->listView->x(), ui->listView->y(), ui->listView->width(), ui->listView->height());
+    LLKSetting->setGeometry(ui->listView->x() + 0.5, ui->listView->y() + 0.5, ui->listView->width() - 1, ui->listView->height() - 0.5);
     LLKSetting->setVisible(false);
     connect(LLKSetting, SIGNAL(isCloseSetting()), this, SLOT(SettingDialogIsClose()));
+
+    // 登出視窗
+    logout = new SignOutDialog(this);
+    logout->setGeometry(350, 100, 500, 280);
+    logout->setVisible(false);
+
+    connect(logout, SIGNAL(LouOut_LLK()), this, SLOT(LogOut_FROM_LLK()));
+
 }
 
 LLK::~LLK()
@@ -181,9 +192,17 @@ void LLK::SettingDialogIsClose()
     pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
     setting->setScaledContents(true);
     setting->setPixmap(*pixmap);
+    if(LLKSetting->clickLogout == true)
+    {
+        logout->setVisible(true);
+    }
 }
 
 // 視窗真正關閉
+void LLK::LogOut_FROM_LLK()
+{
+    this->close();
+}
 void LLK::windowClose()
 {
     // 畫面淡出的動畫
@@ -204,6 +223,7 @@ void LLK::windowClose()
 
 void LLK::windowMax()
 {
+    /*
     // 視窗已最大化
     if (maxWindow == true)
     {
@@ -219,6 +239,17 @@ void LLK::windowMax()
     {
         this->showMaximized();
         maxWindow = true;
+
+    }*/
+    //最大化
+
+    if (this->windowState() == Qt::MaximumSize)
+    {
+        showNormal();
+    }
+    else
+    {
+        showMaximized();
     }
 }
 
@@ -238,7 +269,8 @@ void LLK::resizeEvent(QResizeEvent *event)
     chat->setGeometry(301, 91, this->width() - 301, this->height() - 91);
     setting->setGeometry(0, 20, 71, 71);
     friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
-    LLKSetting->setGeometry(ui->listView->x(), ui->listView->y(), ui->listView->width(), ui->listView->height());
+    LLKSetting->setGeometry(ui->listView->x() + 0.5, ui->listView->y() + 0.5, ui->listView->width() - 1, ui->listView->height() - 0.5);
+    logout->setGeometry(350, 100, 500, 280);
     // 設置最小化、關閉按鈕在界面的位置
     minButton->setGeometry(this->width() - 66, 0, 21, 21);
     maxButton->setGeometry(this->width() - 45, 0, 21, 21);
@@ -402,32 +434,32 @@ bool LLK::nativeEventFilter(const QByteArray &eventType, void *message, long *re
             region(pt, activeFlag);
             if (activeFlag)
             {
-                /*
+
                 switch (dir)
                 {
                 case UP:
                 case DOWN:
-                    SetCursor(QCursor(Qt::SizeVerCursor));
+                    setCursor(QCursor(Qt::SizeVerCursor));
                     break;
                 case LEFT:
                 case RIGHT:
-                    SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEWE)));
+                    SetCursor(LoadCursor(NULL, IDC_SIZEWE));
                     break;
                 case LEFTTOP:
                 case RIGHTBOTTOM:
-                    SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENWSE)));
+                    SetCursor(LoadCursor(NULL, IDC_SIZENWSE));
                     break;
                 case RIGHTTOP:
                 case LEFTBOTTOM:
-                    SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENESW)));
+                    SetCursor(LoadCursor(NULL, IDC_SIZENESW));
                     break;
                 case NONE:
                 default:
-                    SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_ARROW)));
+                    SetCursor(LoadCursor(NULL, IDC_ARROW));
                     return false;
                     break;
                 }
-                */
+
                 return true;
             }
         }

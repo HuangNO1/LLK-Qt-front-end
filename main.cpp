@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     {
         w.show();
         a.installNativeEventFilter(&w);
-
         return a.exec();
     }
     else
