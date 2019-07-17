@@ -89,9 +89,35 @@
      <rect>
       <x>302</x>
       <y>20</y>
-      <width>571</width>
+      <width>261</width>
       <height>71</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>71</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>71</height>
+     </size>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">padding: 20px;</string>
     </property>
     <property name="text">
      <string/>
@@ -190,6 +216,42 @@ padding:4px 10px 4px 10px;</string>
      <string>Please select a chat to start messaging</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_EMAIL">
+    <property name="geometry">
+     <rect>
+      <x>563</x>
+      <y>20</y>
+      <width>310</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>71</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>71</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">padding-left: 20px;
+padding-right: 20px;
+padding-top: 30px;
+padding-bottom: 10px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>listView_noAction</zorder>
    <zorder>label</zorder>
    <zorder>listView</zorder>
@@ -198,6 +260,7 @@ padding:4px 10px 4px 10px;</string>
    <zorder>label_setting</zorder>
    <zorder>lineEditSearch</zorder>
    <zorder>label_6</zorder>
+   <zorder>label_EMAIL</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

@@ -67,7 +67,7 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
             isSelect = true;
             isMouseOver = false;
             isNoAction = false;
-            getNameFromItems = data.name;
+
         }
         else if(option.state.testFlag(QStyle::State_MouseOver))
         {
@@ -113,7 +113,6 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 
         painter->drawEllipse(circle);     //画圆圈
         */
-
         if(isSelect == true)
         {
             painter->setPen(QPen(Qt::white));
@@ -123,7 +122,9 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
             painter->setPen(QPen(Qt::white));
             painter->setFont(QFont("Microsoft JhengHei", 10));
             painter->drawText(telRect,Qt::AlignLeft,data.tel); //绘制最新訊息
-
+            getUSERnameFromItem = data.name;
+            getEMAILFromItem = data.ID;
+            //getAVATARFromItem = data.avatar;
         }
         if(isMouseOver == true || isNoAction == true)
         {
@@ -145,3 +146,18 @@ QSize ItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelInd
 {
     return QSize(160, 70);
 }
+
+QString ItemDelegate::getGetName()
+{
+    return getUSERnameFromItem;
+}
+QString ItemDelegate::getEMAIL()
+{
+    return getEMAILFromItem;
+}
+/*
+QPixmap ItemDelegate::getAVATAR()
+{
+    return getAVATAR();
+}
+*/

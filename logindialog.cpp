@@ -250,7 +250,6 @@ loginDialog::loginDialog(QWidget *parent) : QDialog(parent),
 
 }
 
-
 loginDialog::~loginDialog()
 {
     delete ui;
@@ -315,7 +314,7 @@ void loginDialog::button_click(QString data)
         Server->close();               // 關掉 Server
         Server->hide();
         if (Server->getFlag() == true) // 連網成功
-        {
+        { 
             QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
             animation->setDuration(700);
             animation->setStartValue(1);

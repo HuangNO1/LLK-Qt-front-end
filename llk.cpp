@@ -137,6 +137,8 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
 
     ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+
+
 }
 
 LLK::~LLK()
@@ -199,7 +201,8 @@ void LLK::resizeEvent(QResizeEvent *event)
     ui->lineEditSearch->setGeometry(71, 20, 230, 71);
     ui->listView->setGeometry(0, 91, 301, this->height() - 91);
     ui->listView_noAction->setGeometry(0, 20, this->width(), 71);
-    ui->label_Status->setGeometry(301, 20, this->width() - 71, 71);
+    ui->label_Status->setGeometry(301, 20, 261, 71);
+    ui->label_EMAIL->setGeometry(563, 20, this->width() - 71, 71);
     ui->label_manage->setGeometry(this->width() - 71, 20, 71, 71);
     chat->setGeometry(301, 91, this->width() - 301, this->height() - 91);
     setting->setGeometry(ui->label_setting->x(), ui->label_setting->y(), 71, 71);
@@ -497,6 +500,7 @@ void LLK::initData()
         itemData.avatar = QPixmap(":/images/icon/CustomerCopy.png");
         itemData.name = QString("Name %1").arg(i);
         itemData.tel = QString("TEL:1331234567%1").arg(i);
+        itemData.ID = QString("HH.jj%1@gmail.com").arg(i);
         int randNum = rand()% 3;
         ItemStatus itemStatus;
         /*
@@ -526,7 +530,8 @@ void LLK::initData()
 
 void LLK::on_listView_clicked(const QModelIndex &index)
 {
-    ui->label_Status->setText(getNameFromItems);
+    ui->label_Status->setText(m_delegate->getGetName());
+    ui->label_EMAIL->setText(m_delegate->getEMAIL());
 }
 
 void LLK::on_lineEditSearch_textChanged(const QString &arg1)

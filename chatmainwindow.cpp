@@ -123,7 +123,6 @@ void CHATMainWindow::resizeEvent(QResizeEvent *event)
     link->setGeometry(0, this->height() - 60, 60, 60);
     //ui->pushButton->move(ui->textEdit->width()+ui->textEdit->x() - ui->pushButton->width() - 10,
     //                     ui->textEdit->height()+ui->textEdit->y() - ui->pushButton->height() - 10);
-
     ui->label_tip->setGeometry(this->width() / 2 - ui->label_tip->width() / 2,
                                this->height() / 2 - ui->label_tip->height() / 2 - 30,
                                ui->label_tip->width(), ui->label_tip->height());

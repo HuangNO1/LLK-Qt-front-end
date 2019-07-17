@@ -18,6 +18,7 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 #include <QtGui>
+#include<QtWebSockets/QWebSocket>
 
 class scrollLabel : public QLabel
 {
@@ -100,6 +101,7 @@ private:
     QPoint mouseStartPoint;    // 滑鼠初始位置
     QPoint windowTopLeftPoint; // 窗口初始位置
     bool registerSuccess;      // 判斷是否註冊成功
+    QWebSocket *webSocket;
 
 private slots:
     void button_click(QString);

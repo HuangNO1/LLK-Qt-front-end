@@ -4,7 +4,9 @@
 #include <QModelIndex>
 #include <QStandardItemModel>
 #include "itemdef.h"
-static QString getNameFromItems;
+static QString getUSERnameFromItem;
+static QString getEMAILFromItem;
+//static QPixmap getAVATARFromItem;
 
 class ItemDelegate : public QStyledItemDelegate
 {
@@ -19,6 +21,9 @@ public:
     void paint(QPainter * painter,const QStyleOptionViewItem & option,const QModelIndex & index) const;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
+    QString getGetName();
+    QString getEMAIL();
+    QPixmap getAVATAR();
 };
 
 #endif // ITEMDELEGATE_H
