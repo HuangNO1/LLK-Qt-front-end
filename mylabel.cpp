@@ -67,7 +67,8 @@ Nolabel::Nolabel(const QString &text, QWidget *parent)
 
 void Nolabel::mousePressEvent(QMouseEvent *event)
 {
-    emit clicked(this->text());
+    qDebug() <<"Nolabel is click";
+    emit clicked(tr("setting"));
 }
 
 whitelabel::whitelabel(const QString &text, QWidget *parent)
@@ -80,21 +81,19 @@ whitelabel::whitelabel(const QString &text, QWidget *parent)
 void whitelabel::mousePressEvent(QMouseEvent *event)
 {
     qDebug() << "whitelabel mousePressEvent";
-    setStyleSheet("QLabel {background-color: rgb(230, 230, 230);"
-                  " color:black;");
+    setStyleSheet("QLabel {background-color: rgb(230, 230, 230);color:black;padding:15px;}");
 }
 
 void whitelabel::mouseMoveEvent(QMouseEvent *event)
 {
     qDebug() << "whitelabel mouseMoveEvent";
-    setStyleSheet("QLabel {background-color: rgb(230, 230, 230);"
-                  " color:black;");
+    setStyleSheet("QLabel {background-color: rgb(230, 230, 230);color:black;padding:15px;}");
 }
 
 void whitelabel::mouseReleaseEvent(QMouseEvent *event)
 {
     qDebug() << "whitelabel mouseReleaseEvent";
-    setStyleSheet("QLabel {background-color:rgb(255, 255, 255); color:black;}");
+    setStyleSheet("QLabel {background-color:rgb(255, 255, 255); color:black;padding:15px;}");
 
     // 延遲執行時間，看到按壓效果
     QTime reachTime = QTime::currentTime().addMSecs(200); // 200 毫秒
@@ -108,12 +107,56 @@ void whitelabel::mouseReleaseEvent(QMouseEvent *event)
 }
 void whitelabel::enterEvent(QEvent *)
 {
-    setStyleSheet("QLabel {background-color:rgb(236, 236, 236);color:black;}");
+    setStyleSheet("QLabel {background-color:rgb(236, 236, 236);color:black;padding:15px;}");
     qDebug() << "whitelabel enter";
 }
 void whitelabel::leaveEvent(QEvent *)
 {
-    setStyleSheet("QLabel {background-color:white; color:black;}");
+    setStyleSheet("QLabel {background-color:white; color:black;padding:15px;}");
     qDebug() << "whitelabel leave";
 }
 
+whiteToRedlabel::whiteToRedlabel(const QString &text, QWidget *parent)
+    : QLabel(parent)
+{
+    this->setText(text);
+    //connect(this, SIGNAL(clicked()), this, SLOT(slotClicked()));
+}
+
+void whiteToRedlabel::mousePressEvent(QMouseEvent *event)
+{
+    qDebug() << "whitelabel mousePressEvent";
+    setStyleSheet("QLabel {background-color: rgb(255, 0, 0);color:white;padding:15px;}");
+}
+
+void whiteToRedlabel::mouseMoveEvent(QMouseEvent *event)
+{
+    qDebug() << "whitelabel mouseMoveEvent";
+    setStyleSheet("QLabel {background-color: rgb(255, 0, 0);color:white;padding:15px;}");
+}
+
+void whiteToRedlabel::mouseReleaseEvent(QMouseEvent *event)
+{
+    qDebug() << "whitelabel mouseReleaseEvent";
+    setStyleSheet("QLabel {background-color:rgb(255, 255, 255); color:black;padding:15px;}");
+
+    // 延遲執行時間，看到按壓效果
+    QTime reachTime = QTime::currentTime().addMSecs(200); // 200 毫秒
+    while (QTime::currentTime() < reachTime)
+    {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100); // 延遲 0.2sec
+    }
+
+    emit clicked(this->text());
+    qDebug() << "emit RED click";
+}
+void whiteToRedlabel::enterEvent(QEvent *)
+{
+    setStyleSheet("QLabel {background-color:rgb(255, 84, 84);color:white;padding:15px;}");
+    qDebug() << "white RED label enter";
+}
+void whiteToRedlabel::leaveEvent(QEvent *)
+{
+    setStyleSheet("QLabel {background-color:white; color:black;padding:15px;}");
+    qDebug() << "white RED label leave";
+}

@@ -10,8 +10,17 @@
     <height>490</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>301</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QLabel" name="background_label">
    <property name="geometry">
@@ -21,6 +30,18 @@
      <width>301</width>
      <height>121</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>301</width>
+     <height>121</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>301</width>
+     <height>121</height>
+    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(174, 220, 255);</string>
@@ -34,9 +55,12 @@
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>61</width>
+     <width>71</width>
      <height>71</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(174, 220, 255);</string>
    </property>
    <property name="text">
     <string/>
@@ -58,7 +82,8 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">padding: 8px;</string>
+    <string notr="true">padding: 8px;background-color: rgb(174, 220, 255);
+color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>USERNAME</string>
@@ -79,7 +104,8 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">padding:8px;</string>
+    <string notr="true">padding:8px;
+color: rgba(88, 88, 88, 244);</string>
    </property>
    <property name="text">
     <string>LLK Desktop Version0.0.1</string>

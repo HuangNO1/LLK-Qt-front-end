@@ -32,7 +32,7 @@ protected:
     void leaveEvent(QEvent *);                  // 滑鼠移出
 };
 
-// 無點擊特效
+// 無點擊特效，專門為 LLK 頁面setting 的label
 class Nolabel : public QLabel
 {
     Q_OBJECT
@@ -75,4 +75,25 @@ protected:
     void leaveEvent(QEvent *);                  // 滑鼠移出
 };
 
+// 白紅特效
+class whiteToRedlabel : public QLabel
+{
+    Q_OBJECT
+public:
+    whiteToRedlabel(const QString &text, QWidget *parent = 0);
+    ~whiteToRedlabel() {}
+signals:
+    void clicked(QString);
+
+    /*
+public slots:
+    void slotClicked();
+*/
+protected:
+    void mousePressEvent(QMouseEvent *event);   // 滑鼠點擊
+    void mouseMoveEvent(QMouseEvent *event);    // 滑鼠點擊後移動
+    void mouseReleaseEvent(QMouseEvent *event); // 滑鼠釋放
+    void enterEvent(QEvent *);                  // 滑鼠移入
+    void leaveEvent(QEvent *);                  // 滑鼠移出
+};
 #endif // MYLABEL_H

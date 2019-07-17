@@ -115,7 +115,7 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
 
     isSetting = false;
     setting = new Nolabel("setting", this);
-    setting->setGeometry(ui->label_setting->x(), ui->label_setting->y(), 71, 71);
+    setting->setGeometry(0, 20, 71, 71);
     QPixmap *pixmap = new QPixmap(":/images/icon/Setting_before_clicked.png");
     pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
     setting->setScaledContents(true);
@@ -136,9 +136,10 @@ LLK::LLK(QWidget *parent) : QMainWindow(parent),
 
 
     ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-
-
+    LLKSetting = new SettingDialog(this);
+    LLKSetting->setGeometry(ui->listView->x(), ui->listView->y(), ui->listView->width(), ui->listView->height());
+    LLKSetting->setVisible(false);
+    connect(LLKSetting, SIGNAL(isCloseSetting()), this, SLOT(SettingDialogIsClose()));
 }
 
 LLK::~LLK()
@@ -148,9 +149,39 @@ LLK::~LLK()
 
 void LLK::push_label(QString data)
 {
-
+    qDebug() << "is Push";
+    if(data == QString::fromStdString("setting"))
+    {
+        qDebug() << "SETTINGDIALOG";
+        if(isSetting == false)
+        {
+            QPixmap *pixmap = new QPixmap(":/images/icon/Setting_after_clicked.png");
+            pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
+            setting->setScaledContents(true);
+            setting->setPixmap(*pixmap);
+            LLKSetting->setVisible(true);
+            isSetting = true;
+        }
+        else {
+            QPixmap *pixmap = new QPixmap(":/images/icon/Setting_before_clicked.png");
+            pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
+            setting->setScaledContents(true);
+            setting->setPixmap(*pixmap);
+            LLKSetting->setVisible(false);
+            isSetting = false;
+        }
+    }
 }
 
+void LLK::SettingDialogIsClose()
+{
+    LLKSetting->setVisible(false);
+    isSetting = false;
+    QPixmap *pixmap = new QPixmap(":/images/icon/Setting_before_clicked.png");
+    pixmap->scaled(setting->size(), Qt::KeepAspectRatio);
+    setting->setScaledContents(true);
+    setting->setPixmap(*pixmap);
+}
 
 // 視窗真正關閉
 void LLK::windowClose()
@@ -205,9 +236,9 @@ void LLK::resizeEvent(QResizeEvent *event)
     ui->label_EMAIL->setGeometry(563, 20, this->width() - 71, 71);
     ui->label_manage->setGeometry(this->width() - 71, 20, 71, 71);
     chat->setGeometry(301, 91, this->width() - 301, this->height() - 91);
-    setting->setGeometry(ui->label_setting->x(), ui->label_setting->y(), 71, 71);
+    setting->setGeometry(0, 20, 71, 71);
     friendManage->setGeometry(ui->label_manage->x(), ui->label_manage->y(), 71, 71);
-
+    LLKSetting->setGeometry(ui->listView->x(), ui->listView->y(), ui->listView->width(), ui->listView->height());
     // 設置最小化、關閉按鈕在界面的位置
     minButton->setGeometry(this->width() - 66, 0, 21, 21);
     maxButton->setGeometry(this->width() - 45, 0, 21, 21);

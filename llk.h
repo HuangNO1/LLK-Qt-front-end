@@ -4,6 +4,7 @@
 #include "chatmessage.h"
 #include "mylabel.h"
 #include "chatmainwindow.h"
+#include "settingdialog.h"
 #include <QAction>
 #include <QCheckBox>
 #include <QComboBox>
@@ -112,6 +113,8 @@ private:
     Nolabel *setting;     // setting 按鈕
     Nolabel *friendManage; // 好友管理按鈕
     bool isSetting;        // 判斷 setting 是否被按下
+    SettingDialog *LLKSetting; // 設定視窗
+
 
 private slots:
     void windowClose(); // 視窗關閉
@@ -119,6 +122,9 @@ private slots:
     void windowHide();  // 視窗隱藏
 
     void push_label(QString); // 按下 label 接收訊號
+
+
+    void SettingDialogIsClose();
 
     // 設計 colseEvent 為最小化至托盤----------------------------------------
     void on_listView_clicked(const QModelIndex &index);
